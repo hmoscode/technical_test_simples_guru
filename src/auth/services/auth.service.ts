@@ -2,7 +2,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
 
 import { ConfigService } from '@nestjs/config';
-import { AuthTokenPayModel, AuthTokenResponseDto } from '../dtos/auth.dto';
+import { AuthTokenPayloadModel, AuthTokenResponseDto } from '../dtos/auth.dto';
 
 @Injectable()
 export class AuthService {
@@ -11,13 +11,17 @@ export class AuthService {
     private readonly configService: ConfigService,
   ) {}
 
-  generateTokens(payload: AuthTokenPayModel): AuthTokenResponseDto {
-    const accessToken = this.jwtService.sign(payload);
+  generateTokens(payload: AuthTokenPayloadModel): AuthTokenResponseDto {
+    const secret = this.configService.get<string>('JWT_SECRET');
+    const accessToken = this.jwtService.sign(payload, { secret });
     const refreshToken = this.jwtService.sign(
       {
         sub: payload.sub,
       },
-      { expiresIn: this.configService.get('JWT_REFRES_EXPIRES_IN') },
+      {
+        secret,
+        expiresIn: this.configService.get('JWT_REFRES_EXPIRES_IN'),
+      },
     );
 
     return {

@@ -4,7 +4,7 @@ export interface AuthTokenResponseDto {
   accessToken: string;
   refreshToken: string;
 }
-export interface AuthTokenPayModel {
+export interface AuthTokenPayloadModel {
   sub: number;
   email: string;
 }

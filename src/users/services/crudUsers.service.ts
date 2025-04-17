@@ -23,6 +23,14 @@ export class CrudUsersService {
   }
 
   async update(data: UsersEntity) {
+    const existingUser = await this.userRepository.findOne({
+      where: { id: data.id },
+    });
+
+    if (!existingUser) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
     const verifyEmail = await this.userRepository.findOne({
       where: {
         email: data.email,
@@ -33,6 +41,7 @@ export class CrudUsersService {
     if (verifyEmail) {
       throw new HttpException('Email already exists', HttpStatus.BAD_REQUEST);
     }
+
     await this.userRepository.update(data.id, data);
   }
 

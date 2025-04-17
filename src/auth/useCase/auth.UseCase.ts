@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
 import {
-  AuthTokenPayModel,
+  AuthTokenPayloadModel,
   AuthTokenResponseDto,
   SignInDto,
 } from '../dtos/auth.dto';
@@ -36,7 +36,7 @@ export class AuthUseCase {
       throw new HttpException('Invalid password', HttpStatus.UNAUTHORIZED);
     }
 
-    const payload: AuthTokenPayModel = {
+    const payload: AuthTokenPayloadModel = {
       sub: user.id,
       email: user.email,
     };

@@ -26,15 +26,14 @@ export class CrudUserUseCase {
     return userId;
   }
 
-  async update(data: CreateOrUpdateUserDto) {
+  async update(id: number, data: CreateOrUpdateUserDto) {
     const userEntity: UsersEntity = {
-      id: data.id,
+      id,
       name: data.name,
       lastName: data.lastName,
       avatarUrl: data.avatarUrl,
       email: data.email,
       isActive: data.isActive,
-      password: await this.passwordService.generateHash(data.password),
     };
 
     await this.crudUserService.update(userEntity);

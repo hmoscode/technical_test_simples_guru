@@ -1,9 +1,11 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { UserRepository } from './repositories/users.repository';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersEntity } from './entities/users.entity';
 import { PasswordService } from './services/password.service';
+import { PassportModule } from '@nestjs/passport';
+import { DEFAULT_STRATEGY } from './constants/auth.constants';
 
 @Module({
   providers: [PasswordService],
@@ -12,6 +14,12 @@ export class SharedModule {
   static forRoot(): DynamicModule {
     return {
       imports: [
+        ConfigModule.forRoot({
+          isGlobal: true,
+        }),
+        PassportModule.register({
+          defaultStrategy: DEFAULT_STRATEGY,
+        }),
         TypeOrmModule.forFeature([UsersEntity]),
         TypeOrmModule.forRootAsync({
           inject: [ConfigService],

@@ -30,9 +30,9 @@ export class CreatedResponseDto implements BaseResponseDto {
   @ApiProperty({
     type: String,
     description: 'row created',
-    example: '1',
+    example: 1,
   })
-  rowCreated: string;
+  rowCreated: number;
 }
 export class DeletedResponseDto implements BaseResponseDto {
   @ApiProperty({
