@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsEmail, IsString } from 'class-validator';
+import { Metadata } from 'src/shared/dtos/paginated.dto';
 
 export class CreateOrUpdateUserDto {
   @ApiProperty({
@@ -114,4 +115,16 @@ export class ChangePasswordDto {
   })
   @IsString()
   newPassword: string;
+}
+
+export class PaginatedUsersResponseDto {
+  @ApiProperty({
+    type: [UsersMeResponseDto],
+  })
+  rows: UsersMeResponseDto[];
+
+  @ApiProperty({
+    type: Metadata,
+  })
+  metadata: Metadata;
 }

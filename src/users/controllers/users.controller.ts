@@ -7,6 +7,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   Request,
   UseGuards,
 } from '@nestjs/common';
@@ -20,6 +21,7 @@ import {
 import {
   ChangePasswordDto,
   CreateOrUpdateUserDto,
+  PaginatedUsersResponseDto,
   UsersMeResponseDto,
 } from '../dtos/user.dto';
 import {
@@ -29,6 +31,7 @@ import {
 } from 'src/shared/constants/message.constants';
 import { AuthGuard } from '@nestjs/passport';
 import { ChangePasswordUseCase } from '../useCase/changePasswordUseCase.useCase';
+import { PaginateQueryRaw } from 'src/shared/dtos/paginated.dto';
 
 @Controller('users')
 @ApiTags('users')
@@ -102,5 +105,13 @@ export class UsersController {
       statusCode: HttpStatus.OK,
       message: UPDATED_MESSAGE,
     };
+  }
+
+  @Get('/all')
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard())
+  @ApiOkResponse({ type: PaginatedUsersResponseDto })
+  async getAllUsers(@Query() params: PaginateQueryRaw) {
+    return await this.crudUserUseCase.getAllPaginated(params);
   }
 }

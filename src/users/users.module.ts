@@ -8,6 +8,9 @@ import { PassportModule } from '@nestjs/passport';
 import { DEFAULT_STRATEGY } from 'src/shared/constants/auth.constants';
 import { ChangePasswordUseCase } from './useCase/changePasswordUseCase.useCase';
 
+import { GetAllUsersPaginatedService } from './services/getAllPaginated.service';
+import { PaginatedService } from 'src/shared/services/paginated.service';
+
 @Module({
   imports: [
     PassportModule.register({
@@ -21,6 +24,8 @@ import { ChangePasswordUseCase } from './useCase/changePasswordUseCase.useCase';
     PasswordService,
     UserRepository,
     ChangePasswordUseCase,
+    GetAllUsersPaginatedService,
+    PaginatedService,
   ],
 })
 export class UsersModule {}
