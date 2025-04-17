@@ -13,6 +13,6 @@ export default new DataSource({
   port: Number(configService.get('DB_PORT')),
   host: configService.get('DB_HOST'),
   synchronize: false,
-  entities: [`${__dirname}/src/**/*.entity.{ts,js}`],
+  entities: [__dirname + '/../**/*.entity.{ts,js}'],
   migrations: [`${__dirname}/src/**/migrations/*.{js,ts}`],
 });
