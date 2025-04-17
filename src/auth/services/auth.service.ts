@@ -17,7 +17,7 @@ export class AuthService {
       {
         sub: payload.sub,
       },
-      { expiresIn: this.configService.get('JWT_EXPIRES_IN') },
+      { expiresIn: this.configService.get('JWT_REFRES_EXPIRES_IN') },
     );
 
     return {

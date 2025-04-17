@@ -16,11 +16,13 @@ export class UsersEntity {
 
   @Column('varchar', {
     length: 100,
+    nullable: false,
   })
   name: string;
 
   @Column('varchar', {
     length: 102,
+    nullable: false,
   })
   lastName: string;
 
