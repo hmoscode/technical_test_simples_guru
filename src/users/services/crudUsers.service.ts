@@ -53,8 +53,17 @@ export class CrudUsersService {
     const user = await this.userRepository.findOne({
       where: {
         id,
+        isActive: true,
       },
-      select: ['id', 'name', 'lastName', 'isActive', 'avatarUrl'],
+      select: [
+        'id',
+        'name',
+        'lastName',
+        'isActive',
+        'avatarUrl',
+        'password',
+        'email',
+      ],
     });
 
     if (!user) {

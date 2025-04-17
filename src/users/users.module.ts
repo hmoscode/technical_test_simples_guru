@@ -6,6 +6,7 @@ import { UserRepository } from 'src/shared/repositories/users.repository';
 import { UsersController } from './controllers/users.controller';
 import { PassportModule } from '@nestjs/passport';
 import { DEFAULT_STRATEGY } from 'src/shared/constants/auth.constants';
+import { ChangePasswordUseCase } from './useCase/changePasswordUseCase.useCase';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { DEFAULT_STRATEGY } from 'src/shared/constants/auth.constants';
     CrudUserUseCase,
     PasswordService,
     UserRepository,
+    ChangePasswordUseCase,
   ],
 })
 export class UsersModule {}

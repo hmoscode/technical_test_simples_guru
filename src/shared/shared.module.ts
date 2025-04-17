@@ -6,10 +6,10 @@ import { UsersEntity } from './entities/users.entity';
 import { PasswordService } from './services/password.service';
 import { PassportModule } from '@nestjs/passport';
 import { DEFAULT_STRATEGY } from './constants/auth.constants';
+import { JwtStrategy } from './strategies/jwt.strategy';
+import { JwtService } from '@nestjs/jwt';
 
-@Module({
-  providers: [PasswordService],
-})
+@Module({})
 export class SharedModule {
   static forRoot(): DynamicModule {
     return {
@@ -36,7 +36,7 @@ export class SharedModule {
       ],
 
       module: SharedModule,
-      providers: [UserRepository],
+      providers: [UserRepository, JwtStrategy, PasswordService, JwtService],
       exports: [UserRepository],
     };
   }

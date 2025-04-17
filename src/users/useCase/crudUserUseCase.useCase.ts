@@ -46,6 +46,7 @@ export class CrudUserUseCase {
   async findById(id: number): Promise<UsersEntity> {
     const user = await this.crudUserService.findById(id);
 
+    delete user.password;
     return user;
   }
 }

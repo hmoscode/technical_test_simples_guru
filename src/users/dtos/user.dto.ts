@@ -68,6 +68,14 @@ export class UsersMeResponseDto {
   @ApiProperty({
     type: 'string',
     required: true,
+    example: 'jhondoe@gmial.com',
+  })
+  @IsEmail()
+  email: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: true,
     example: 'Doe',
   })
   @IsString()
@@ -88,4 +96,22 @@ export class UsersMeResponseDto {
   })
   @IsBoolean()
   isActive: boolean;
+}
+
+export class ChangePasswordDto {
+  @ApiProperty({
+    type: 'string',
+    required: true,
+    example: '************',
+  })
+  @IsString()
+  oldPassword: string;
+
+  @ApiProperty({
+    type: 'string',
+    required: true,
+    example: '************',
+  })
+  @IsString()
+  newPassword: string;
 }

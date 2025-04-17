@@ -20,11 +20,15 @@ export class AuthUseCase {
     const user = await this.userRepostory.findOne({
       where: {
         email: data.email,
+        isActive: true,
       },
     });
 
     if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      throw new HttpException(
+        'The user does not exist or their account is inactive. Please verify the provided email address.',
+        HttpStatus.NOT_FOUND,
+      );
     }
 
     const verifyPassword = await this.passwordService.compare(
