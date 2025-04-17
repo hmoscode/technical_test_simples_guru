@@ -43,4 +43,10 @@ export class CrudUserUseCase {
   async delete(id: number) {
     await this.crudUserService.delete(id);
   }
+
+  async findById(id: number): Promise<UsersEntity> {
+    const user = await this.crudUserService.findById(id);
+
+    return user;
+  }
 }
