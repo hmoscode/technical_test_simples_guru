@@ -72,16 +72,16 @@ La documentación interactiva de la API está disponible a través de Swagger UI
 **URL de acceso**: `/api`
 
 **Autenticación requerida**: Basic Auth
-- Username: jhondoe@gmail.com
-- Password: 123
+- Username: admin
+- Password: admin
 
 ### Usuario de prueba
 
 Para facilitar las pruebas iniciales, puede utilizar el siguiente usuario:
 
 ```
-Username: admin@example.com
-Password: admin123
+Username: jhondoe@gmail.com
+Password: 123
 ```
 
 ## Endpoints principales
