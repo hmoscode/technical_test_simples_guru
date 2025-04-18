@@ -26,6 +26,12 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+Este proyecto implementa una API REST con las siguientes características:
+- Autenticación mediante JWT (JSON Web Tokens)
+- CRUD completo de usuarios
+- Funcionalidad de cambio de contraseñas
+- Documentación interactiva con Swagger
+
 ## Project setup
 
 ```bash
@@ -58,28 +64,36 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Resources
+## API Documentation
 
-Check out a few resources that may come in handy when working with NestJS:
+### Swagger
+La documentación interactiva de la API está disponible a través de Swagger UI.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**URL de acceso**: `/api`
 
-## Support
+**Autenticación requerida**: Basic Auth
+- Username: admin
+- Password: admin
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Usuario de prueba
 
-## Stay in touch
+Para facilitar las pruebas iniciales, puede utilizar el siguiente usuario:
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```
+Username: jhondoe@gmail.com
+Password: 123
+```
 
-## License
+## Endpoints principales
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+| Método | Ruta | Descripción | Autenticación |
+|--------|------|-------------|--------------|
+| POST | /users/register | Registrar nuevo usuario | No |
+| PATCH | /users/update/{id} | Actualizar usuario | JWT |
+| DELETE | /users/{id} | Eliminar usuario | JWT |
+| GET | /users/me | Obtener usuario actual | JWT |
+| PATCH | /users/change-password | Cambiar contraseña | JWT |
+| GET | /users/all | Listar todos los usuarios | JWT |
+| POST | /auth/sign-in | Iniciar sesión | No |
+
+
