@@ -69,7 +69,7 @@ $ npm run test:cov
 ### Swagger
 La documentación interactiva de la API está disponible a través de Swagger UI.
 
-**URL de acceso**: `/api`
+**URL de acceso**: `/docs`
 
 **Autenticación requerida**: Basic Auth
 - Username: admin
