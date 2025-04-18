@@ -8,7 +8,7 @@ import * as basicAuth from 'express-basic-auth';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = new ConfigService();
-
+  app.setGlobalPrefix('api/v1');
   const swaggerUser = configService.get<string>('SWAGGER_USER');
   const swaggerPassword = configService.get<string>('SWAGGER_PASS');
   app.use(
@@ -40,8 +40,6 @@ async function bootstrap() {
   app.enableCors({
     origin: '*',
   });
-
-  app.setGlobalPrefix('api/v1');
 
   await app.listen(process.env.PORT ?? 3000);
 }
