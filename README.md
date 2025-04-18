@@ -96,4 +96,7 @@ Password: 123
 | GET | /users/all | Listar todos los usuarios | JWT |
 | POST | /auth/sign-in | Iniciar sesión | No |
 
+## Video Explicativo 
+https://youtu.be/h76yQVbDsTY
+
 
