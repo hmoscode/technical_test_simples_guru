@@ -7,10 +7,14 @@ import * as basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const configService = new ConfigService();
-  app.setGlobalPrefix('api/v1');
+
+  const configService = app.get(ConfigService);
+
   const swaggerUser = configService.get<string>('SWAGGER_USER');
   const swaggerPassword = configService.get<string>('SWAGGER_PASS');
+
+  app.setGlobalPrefix('api/v1');
+
   app.use(
     ['/api'],
     basicAuth({
@@ -20,6 +24,7 @@ async function bootstrap() {
       },
     }),
   );
+
   const config = new DocumentBuilder()
     .setTitle('Simplest API')
     .setVersion('1.0')
