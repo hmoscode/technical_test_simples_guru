@@ -32,6 +32,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ChangePasswordUseCase } from '../useCase/changePasswordUseCase.useCase';
 import { PaginateQueryRaw } from 'src/shared/dtos/paginated.dto';
+import { seconds, Throttle } from '@nestjs/throttler';
 
 @Controller('users')
 @ApiTags('users')
@@ -92,6 +93,12 @@ export class UsersController {
   }
 
   @Patch('/change-password')
+  @Throttle({
+    short: {
+      limit: 5,
+      ttl: seconds(60),
+    },
+  })
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
   @ApiOkResponse({ type: UpdatedResponseDto })
