@@ -9,18 +9,17 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configService = app.get(ConfigService);
-
-  const swaggerUser = configService.get<string>('SWAGGER_USER');
-  const swaggerPassword = configService.get<string>('SWAGGER_PASS');
+  const swaggerUser = configService.get('SWAGGER_USER');
+  const swaggerPassword = configService.get('SWAGGER_PASS');
 
   app.setGlobalPrefix('api/v1');
 
   app.use(
-    ['/api'],
+    '/docs',
     basicAuth({
       challenge: true,
       users: {
-        [swaggerUser]: swaggerPassword,
+        [swaggerUser]: swaggerPassword || '',
       },
     }),
   );
@@ -32,7 +31,8 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+
+  SwaggerModule.setup('docs', app, document);
 
   app.useGlobalPipes(
     new ValidationPipe({
